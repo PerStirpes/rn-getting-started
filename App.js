@@ -1,28 +1,21 @@
-import React, { Component } from "react";
-import { AppRegistry, Image, StyleSheet, Text, View } from "react-native";
+import React, { Component } from 'react';
+import { AppRegistry, SectionList, StyleSheet, Text, View } from 'react-native';
 
-class Greeting extends Component {
+export default class SectionListBasics extends Component {
   render() {
-    return <Text> Hello {this.props.name}!</Text>;
-  }
-}
-
-export default class LotsOfGreetings extends Component {
-  render() {
-    let pic = {
-      uri:
-        "https://upload.wikimedia.org/wikipedia/commons/d/de/Bananavarieties.jpg",
-    };
-
     return (
       <View style={styles.container}>
-        <Image source={pic} style={{ width: 193, height: 110 }} />
-        <Greeting name="Rex" />
-        <Greeting name="Bill" />
-        <Greeting name="Lorena" />
-        <Text>Open up App.js to start working on your app!</Text>
-        <Text>Changes you make will automatically reload.</Text>
-        <Text>Shake your phone to open the developer menu.</Text>
+        <SectionList
+          sections={[
+            {title: 'D', data: ['Devin']},
+            {title: 'J', data: ['Jackson', 'James', 'Jillian', 'Jimmy', 'Joel', 'John', 'Julie']},
+            {title: "L", data: ['Lorena', "Larry", "lucky", "lucy", "like", "luke", "lawerence", "lady", "Maybe"]},
+            {title: "M", data: ["mike", "matt", 'mary', "merv"]}
+          ]}
+          renderItem={({item}) => <Text style={styles.item}>{item}</Text>}
+          renderSectionHeader={({section}) => <Text style={styles.sectionHeader}>{section.title}</Text>}
+          keyExtractor={(item, index) => index}
+        />
       </View>
     );
   }
@@ -30,11 +23,23 @@ export default class LotsOfGreetings extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
+   flex: 1,
+   paddingTop: 22
   },
-});
+  sectionHeader: {
+    paddingTop: 2,
+    paddingLeft: 10,
+    paddingRight: 10,
+    paddingBottom: 2,
+    fontSize: 14,
+    fontWeight: 'bold',
+    backgroundColor: 'rgba(247,247,247,1.0)',
+  },
+  item: {
+    padding: 10,
+    fontSize: 18,
+    height: 44,
+  },
+})
 
-AppRegistry.registerComponent("AwesomeProject", () => LotsOfGreetings);
+
